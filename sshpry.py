@@ -11,13 +11,13 @@ import re
 import os
 
 if not len(sys.argv[1:]):
-	print 'Usage: sshspy.py PID'
+	print('Usage: sshspy.py PID')
 	sys.exit(1)
 
 pid = str(int(sys.argv[1]))
 #pid = str(int(check_output("ps x|grep $(last|grep logge|awk '{print $2}')|grep ssh|awk '{print $1}'",shell=True)))
 
-print 'Attaching to %s' % pid
+print('Attaching to %s' % pid)
 
 sshpipe = Popen(['strace', '-s', '16384', '-p', pid, "-e", \
     "read"], shell=False, stdout=PIPE, stderr=PIPE)
@@ -33,6 +33,5 @@ while 1:
 
 
 	elif not output and sshpipe.returncode is not None:
-		print "Connection closed"
+		print("Connection closed")
 		break
-
